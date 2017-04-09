@@ -1,5 +1,6 @@
 package com.githubauto.webdriver;
 
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WebdriverBuilder {
 	private static WebDriver webDriver;
+	
+	private static String projectPath = Paths.get(".").toAbsolutePath().normalize().toString();
 	
 	public static WebDriver getDriver() {		
 		if (webDriver == null) {
@@ -32,20 +35,18 @@ public class WebdriverBuilder {
 	}
 	
 	private static WebDriver newChromeDriver() {
-		System.setProperty("webdriver.chrome.driver",
-			    "/home/kumara/javaworld/webdriver-jars/chromedriver");		
+		System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");	
 		WebDriver webDriver = new ChromeDriver();
 		return webDriver;
 	}
 	
 	private static WebDriver newFireFoxDriver() {	
 		System.setProperty("webdriver.gecko.driver", 
-				"/home/kumara/javaworld/webdriver-jars/geckodriver");
+				projectPath +"/drivers/geckodriver");
 		//System.setProperty("webdriver.firefox.bin", "/path/to/firefox/bin");
 		WebDriver webDriver = new FirefoxDriver();
 		webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		webDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
 		return webDriver;
 	}
-
 }
