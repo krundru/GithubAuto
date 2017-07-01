@@ -22,7 +22,7 @@ public class HelloWorld {
 		}
 		System.out.println("I am done!");
 	}
-
+// privite function
 	private static void printList() {
 		List<String> names = Arrays.asList("one", "two");
 		System.out.println(names);
